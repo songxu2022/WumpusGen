@@ -127,7 +127,7 @@ vector<string> find_adjacent_spots(signed int x, signed int y) {
         adjacent_spots.push_back(generated_board[x][y - 1])
     }
 
-    // return the vector of all the possible adjacent spots around
+    // returns the vector of all the possible adjacent spots around the node
     return adjacent_spots;
 }
 
