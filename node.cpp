@@ -3,46 +3,28 @@
 #include "node.h"
 using namespace std;
 
-Node::Node(int xcoord, int ycoord, string & label_, vector<string> & generatedboard) {
+Node::Node(int xcoord, int ycoord, string & label_) {
     // constructor function
     x_coord = xcoord;
     y_coord = ycoord;
     label = label_;
-    generated_board = generatedboard;
 }
 
 Node::~Node() { // destuctor will call the function that deallocates the generated board
-    deallocate_generated_board();
-}
-
-void Node::deallocate_generated_board() {
-    // function to delete the generated board and prevent memory leaks
-    for (int i = 0; i < generated_board.size(); i++){
-        for (int j = 0; j < generated_board[i].size(); j++) {
-            delete generated_board[i][j];
-        }
-        delete [] generated_board[i];
-    }
-    delete [] generated_board;
+    delete Node; 
 }
 
 Node::Node(const Node& n) { //calls copy constructor function
-    copy(b);
+    copy(n);
 }
 
-void Node::copy(const Node &n) {// function that copies the generated board
+Node* Node::copy(const Node &n) {// function that copies node object
     // copy over variables
-    this->x_coord = n.x_coord;
-    this->y_coord = n.y_coord;
-    this->label = n.label;
-    // loop through the generated board and copy everything over
-    this->generated_board = new string*[this->generated_board.size()]
-    for (int i = 0; i < this->generated_board.size(); i++){
-        this->generated_board[i] = new string[generated_board[i].size()]
-        for (int j = 0; j < this->generated_board[0].size(); j++) {
-            this->generated_board[i][j] = n.generated_board[i][j];
-        }
-    }
+    Node * newnode = new Node();
+    n->x_coord = newnode.x_coord;
+    n->y_coord = newnode.y_coord;
+    n->label = newnode.label;
+    return newnode; 
 }
 
 Node& Node::operator=(const Node & n) { // assigment operator function
