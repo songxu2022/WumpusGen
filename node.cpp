@@ -52,7 +52,7 @@ int Node::get_y_coord() const {
     return y_coord;
 }
 
-const string& Node::get_label() const {
+string& Node::get_label() const {
     return label;
 }
 
@@ -60,14 +60,13 @@ int Node::get_wall_size() const {
     return wall_size;
 }
 
-bool Node::is_start_spot() {
-    /* 
-    A node is at the starting location if it is at the bottom left corner of the generated board. This
-    means that the x coordinate should be in the last row of the generated board (its  wall size) and the y
-    coordinate should be in the first spot in the last row (that spot is index 0).
-    */
+void Node::set_label(string new_label) {
+    label = new_label;
+}
 
-    return x_coord == wall_size - 1 && y_coord == 0;
+bool Node::is_start_spot() {
+    // this function assumes the start spot is labeled with an "s"
+    return label == "s";
 }
 
 bool Node::next_to_right_wall() {
@@ -102,32 +101,24 @@ bool Node::next_to_lower_wall() {
     return false;
  }
 
+bool Node::is_empty() {
+    // this function assumes that any empty spot is labeled "e"
+    return label == "e";
+}
 
 bool Node::is_pit() {
-    /* 
-    This function assumes that any spot on the board with a pit is labeled "pit". This
-    may need to be changed if the pits are labeled differently.
-    */
-
-    return label == "pit";
+    //This function assumes that any spot on the board with a pit is labeled "p"
+    return label == "p";
 }
 
 bool Node::is_wumpus() {
-    /* 
-    This function assumes that any spot on the board with a wumpus is labeled "wumpus". This
-    may need to be changed if the wumpus spot is labeled differently.
-    */
-
-    return label == "wumpus";
+    //This function assumes that any spot on the board with a wumpus is labeled "w"
+    return label == "w";
 }
 
 bool Node::is_gold() {
-    /* 
-    This function assumes that any spot on the board with the gold is labeled "gold". This
-    may need to be changed if the gold spot is labeled differently.
-    */
-
-    return label == "gold";
+    //This function assumes that any spot on the board with the gold is labeled "g"
+    return label == "g";
 }
 
 bool Node::is_notpit_marked() {
