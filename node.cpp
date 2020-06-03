@@ -147,3 +147,20 @@ bool Node::is_notwumpus_marked() {
 
     return label == "nw";
 }
+
+bool Node::marked_as_visited() {
+    /* 
+    This function assumes that any spot that is marked as visited is labeled with a "v". This
+    may need to be changed if the visited spots are labeled differently.
+    For example a no pit spot that was visited would be labeled "npv" so we must check the label
+    to see if there is a v character in it. 
+    */
+
+    for (int i = 0; i < label.size(); i++) {
+        if (label[i] == "v") {
+            return true;
+        }
+    }
+    // if no v was found then the spot was not visited, so return false
+    return false;
+}

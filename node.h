@@ -39,6 +39,7 @@ class Node {
     bool is_gold(); // checks if the node is the gold
     bool is_notpit_marked(); // checks if the node is marked as not having a pit
     bool is_notwumpus_marked(); // checks if the node is marked as not having a wumpus
+    bool marked_as_visited(); // checks if the node was marked as having been visited
 
     private:
 
