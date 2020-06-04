@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 using namespace std;
 
 /* 
@@ -14,10 +13,6 @@ class Node {
     and the size of each wall (ex: if it's a 4x4 board the wall size would be 4)
     */
     Node(int xcoord, int ycoord, string & label_, int wall_size);
-
-    Node(const Node& n); //copy constructor
-    Node& operator=(const Node & n); // assignment operator
-    ~Node(); // destructor
 
     // getters
     int get_x_coord() const; // gets x coordinate
@@ -46,13 +41,8 @@ class Node {
 
     private:
 
-    // private helper functions used in copy constructor and destructor
-    void copy(const Node & n);
-    void delete_node();
-
-    // private variables
     int x_coord;
-    int y coord;
+    int y_coord;
     string label;
     int wall_size; 
 

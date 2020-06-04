@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 #include "node.h"
 using namespace std;
 
@@ -9,39 +8,6 @@ Node::Node(int xcoord, int ycoord, string & label_, int wall_size_) {
     y_coord = ycoord;
     label = label_;
     wall_size = wall_size_;
-}
-
-Node::~Node() { // destuctor will call the function that deletes everything
-    deletenode();
-}
-
-Node::Node(const Node& n) { //calls copy constructor function
-    copy(n);
-}
-
-Node* Node::copy(const Node &n) {// function that copies node object
-    // copy over variables
-    Node * newnode = new Node();
-    newnode->x_coord = n.x_coord;
-    newnode->y_coord = n.y_coord
-    newnode->label = n.label;
-    newnode.wall_size = n.wall_size;
-    return newnode; 
-}
-
-void Node::deletenode() {
-    // destructor function goes here
-}
-
-Node& Node::operator=(const Node & n) { // assigment operator function
-    // check if the two node objects are equal
-    if (this != &n) { 
-        // if two node objects are not equal, call destructor and copy
-        deletenode();
-        this->copy(n);
-    }
-    // return pointer to object
-    return *this;
 }
 
 int Node::get_x_coord() const {
