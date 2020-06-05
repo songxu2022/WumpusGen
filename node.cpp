@@ -69,7 +69,17 @@ bool Node::next_to_lower_wall() {
 
 bool Node::is_empty() {
     // this function assumes that any empty spot is labeled "e"
-    return label == "e";
+    if (label == "e") {
+        return true;
+    }
+    // if the label has multiple markings, check and see if the empty label "e" is there
+    for (int i = 0; i < label.size(); i++) {
+        if (label[i] == "e") {
+            return true;
+        }
+    }
+    // no empty marking found so return false
+    return false;
 }
 
 bool Node::is_pit() {
@@ -90,19 +100,52 @@ bool Node::is_gold() {
 bool Node::is_notpit_marked() {
     /* 
     This function assumes that any spot that is marked as not having a pit is labeled "np". This
-    may need to be changed if the spot is labeled differently. 
+    may need to be changed if the spot is labeled differently. Because a spot marked as not having
+    a pit can also be marked as visited, I check each character in the label to see if there is
+    an "np"
     */
 
-    return label == "np";
+    // check if the label is simply np
+    if (label == "np") {
+        return true;
+    }
+
+    // check if the label has np somewhere in it
+    for (int i = 0; i < label.size(); i++) {
+        if (label[i] == "n") {
+            if (i+1 < label.size() && label[i+1] == "p") {
+                return true;
+            }
+        }
+    }
+
+    // "np" is not found in the label so return false
+    return false;
 }
 
 bool Node::is_notwumpus_marked() {
     /* 
     This function assumes that any spot that is marked as not having a wumpus is labeled "nw". This
-    may need to be changed if the spot is labeled differently. 
+    may need to be changed if the spot is labeled differently. Because a spot marked as not having a 
+    wumpus can also be marked as visited, I check each character in the label to see if there is a "nw"
     */
 
-    return label == "nw";
+    // check if label is simply "nw"
+    if (label == "nw") {
+        return true;
+    }
+
+    // check if "nw" is somewhere in the label
+    for (int i = 0; i < label.size(); i++) {
+        if (label[i] == "n") {
+            if (i+1 < label.size() && label[i+1] == "w") {
+                return true;
+            }
+        }
+    }
+
+    // "nw" is not found in the label so return false
+    return false;
 }
 
 bool Node::marked_as_visited() {
@@ -112,7 +155,13 @@ bool Node::marked_as_visited() {
     For example a no pit spot that was visited would be labeled "npv" so we must check the label
     to see if there is a v character in it. 
     */
+    
+    // if the label is just marked as visited only
+    if (label == "v") {
+        return true;
+    }
 
+    // check if the label has "v" somewhere in it
     for (int i = 0; i < label.size(); i++) {
         if (label[i] == "v") {
             return true;
