@@ -22,7 +22,7 @@ class Node {
 
     // setters
     void set_label(string new_label); // sets the label of the node
-
+	
     // bools for what's around the node
     bool is_start_spot(); // checks if node is the starting location
     bool next_to_right_wall(); // checks if the node is next to the right wall
@@ -38,7 +38,18 @@ class Node {
     bool is_notpit_marked(); // checks if the node is marked as not having a pit
     bool is_notwumpus_marked(); // checks if the node is marked as not having a wumpus
     bool marked_as_visited(); // checks if the node was marked as having been visited
-
+	
+	/*below functions need to be implemented or add a way to initialize*/
+	bool is_breeze();
+	bool is_stench();
+	// bools for
+	//shoot arrow 
+	void killw(); // shoot at this node 
+	// bool for markings for algorithm
+	bool nw=false;
+	bool np=false;
+	bool visited=false;
+	
     private:
 
     int x_coord;
