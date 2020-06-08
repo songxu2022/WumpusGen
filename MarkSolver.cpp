@@ -1,7 +1,10 @@
+#ifndef WUMPUSMARKSOLVER
+#define WUMPUSMARKSOLVER
 #include <iostream>
 #include <vector>
 #include <string>
 #include "node.cpp"
+
 using namespace std;
 typedef vector< vector<Node> > game;
 
@@ -102,11 +105,15 @@ game expandbyrule(game gamestate, int mapsize){
 */
 bool marksolver( game theboard, int mapsize ){
 	// initialize the game
+	
 	game gamestate( theboard);
-	int i,j=0;
+	int i=0;
+	int j=0;
 	gamestate[i][j].visited=true;
+	
 	gamestate[i][j].nw=true;
 	gamestate[i][j].np=true;
+	
 	if (gamestate[i][j].is_breeze() && gamestate[i][j].is_stench()){
 		for(int x=0;x<mapsize;x++){
 			for(int y =0;y<mapsize;y++){
@@ -225,3 +232,5 @@ bool marksolver( game theboard, int mapsize ){
 	
 	return false;
 }
+
+#endif

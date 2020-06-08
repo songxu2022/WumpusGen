@@ -1,9 +1,12 @@
+#ifndef WUMPUSNODECPP
+#define WUMPUSNODECPP
 #include <iostream>
 #include <string>
 #include "node.h"
+
 using namespace std;
 
-Node::Node(int xcoord, int ycoord, string &label_, int wall_size_) {
+Node::Node(int xcoord, int ycoord, string label_, int wall_size_) {
     // constructor function
     x_coord = xcoord;
     y_coord = ycoord;
@@ -121,7 +124,7 @@ bool Node::is_breeze() {
     "breeze". This may need to be changed if spots with breezes are labeled differently.
     */
 
-    return label == "breeze";
+    return breeze;
 }
 
 bool Node::is_stench() {
@@ -130,7 +133,7 @@ bool Node::is_stench() {
     "stench". This may need to be changed if spots with a stench are labeled differently.
     */
 
-    return label == "stench";
+    return stench;
 }
 
 void Node::killw() {
@@ -141,3 +144,5 @@ void Node::killw() {
     if (this->label=="w"){this->label = "e";this->nw=true; this->np=true;}
     return;
 }
+
+#endif
