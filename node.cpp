@@ -138,6 +138,6 @@ void Node::killw() {
      if the wumpus is shot and killed, that means the node's label must change from "w"/having a wumpus
      to "e" for it is now empty
      */
-    this->label = "e";
+    if (this->label=="w"){this->label = "e";this->nw=true; this->np=true;}
     return;
 }
