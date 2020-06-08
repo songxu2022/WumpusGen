@@ -5,6 +5,11 @@
 using namespace std;
 typedef vector< vector<Node> > game;
 
+/*  checkgold will check if the game is end or not.
+	@param gamestate  It is the game board of the current state
+	@param mapsize  It is n for an n*n board, we assume that all the boards are in shape of n*n.
+	@return the function returns true if the board is solved;  false if it is not sovled.
+*/
 bool checkgold(game gamestate, int mapsize){
 	for(int i=0;i<mapsize;i++){
 		for(int j =0;j<mapsize;j++){
@@ -14,6 +19,11 @@ bool checkgold(game gamestate, int mapsize){
 	return true;
 }
 
+/* 	countposwnum counts the number of possible spots of wumpus that the robot think it can be.
+	@param gamestate  It is the game board of the current state
+	@param mapsize  It is n for an n*n board, we assume that all the boards are in shape of n*n.
+	@return the the number of possible spots of wumpus that the robot think it can be.
+*/
 int countposwnum(game gamestate, int mapsize){
 	int count=0;
 	for(int i=0;i<mapsize;i++){
@@ -23,7 +33,11 @@ int countposwnum(game gamestate, int mapsize){
 	}
 	return count;
 }
-
+/* 	expandbyrule will put all the nodes that can be visited into visited nodes by the rule of the marking algorithm.
+	@param gamestate  It is the game board of the current state
+	@param mapsize  It is n for an n*n board, we assume that all the boards are in shape of n*n.
+	@return the gameboard after the expanding.
+*/
 game expandbyrule(game gamestate, int mapsize){
 	bool expanding=true;
 	while(expanding){
@@ -162,6 +176,7 @@ bool marksolver( game theboard, int mapsize ){
 	else if(wnumber==2){
 		int x=0;
 		int y=0;
+		int c,d=0;
 		for(int i=0;i<mapsize;i++){
 			for(int j =0;j<mapsize;j++){
 				if (beforeshooting[i][j].nw==false){
@@ -172,21 +187,38 @@ bool marksolver( game theboard, int mapsize ){
 			}
 		}
 		here:
-		game beforeshooting1(beforeshooting);
-		beforeshooting1[x][y].killw();
-		game aftershooting1=expandbyrule(beforeshooting1,mapsize);
+		
+		
 		for(int i=0;i<mapsize;i++){
 			for(int j =0;j<mapsize;j++){
 				if (beforeshooting[i][j].nw==false){
-				x=i;
-				y=j;
+				c=i;
+				d=j;
 				
 				}
 			}
 		}
-	
+		game beforeshooting1(beforeshooting);
+		if(beforeshooting1[x][y].is_wumpus()){
+			beforeshooting1[x][y].nw=true;
+			beforeshooting1[c][d].nw=true;
+			beforeshooting1[x][y].np=true;
+		}
+		else{
+			beforeshooting1[x][y].nw=true;
+		}
+		beforeshooting1[x][y].killw();
+		game aftershooting1=expandbyrule(beforeshooting1,mapsize);
 		game beforeshooting2(beforeshooting);
-		beforeshooting2[x][y].killw();
+		if(beforeshooting2[c][d].is_wumpus()){
+			beforeshooting2[x][y].nw=true;
+			beforeshooting2[c][d].nw=true;
+			beforeshooting2[c][d].np=true;
+		}
+		else{
+			beforeshooting2[c][d].nw=true;
+		}
+		beforeshooting2[c][d].killw();
 		game aftershooting2=expandbyrule(beforeshooting2,mapsize);
 		if(checkgold(aftershooting1,mapsize)&&checkgold(aftershooting2,mapsize)) return true;
 	}
