@@ -1,8 +1,9 @@
 #include <iostream>
+#include <string>
 #include "node.h"
 using namespace std;
 
-Node::Node(int xcoord, int ycoord, string & label_, int wall_size_) {
+Node::Node(int xcoord, int ycoord, string &label_, int wall_size_) {
     // constructor function
     x_coord = xcoord;
     y_coord = ycoord;
@@ -58,7 +59,7 @@ bool Node::next_to_lower_wall() {
  bool Node::is_corner_spot() {
      //A node is in a corner if it is next to a vertical wall AND a horizontal wall
     if ((next_to_left_wall() && next_to_upper_wall()) ||
-        (next_to_left_wall && next_to_lower_wall()) ||
+        (next_to_left_wall() && next_to_lower_wall()) ||
         (next_to_right_wall() && next_to_upper_wall()) ||
         (next_to_right_wall() && next_to_lower_wall())) {
             return true;
@@ -69,17 +70,7 @@ bool Node::next_to_lower_wall() {
 
 bool Node::is_empty() {
     // this function assumes that any empty spot is labeled "e"
-    if (label == "e") {
-        return true;
-    }
-    // if the label has multiple markings, check and see if the empty label "e" is there
-    for (int i = 0; i < label.size(); i++) {
-        if (label[i] == "e") {
-            return true;
-        }
-    }
-    // no empty marking found so return false
-    return false;
+    return label == "e";
 }
 
 bool Node::is_pit() {
@@ -100,73 +91,26 @@ bool Node::is_gold() {
 bool Node::is_notpit_marked() {
     /* 
     This function assumes that any spot that is marked as not having a pit is labeled "np". This
-    may need to be changed if the spot is labeled differently. Because a spot marked as not having
-    a pit can also be marked as visited, I check each character in the label to see if there is
-    an "np"
+    may need to be changed if the spot is labeled differently.
     */
 
-    // check if the label is simply np
-    if (label == "np") {
-        return true;
-    }
-
-    // check if the label has np somewhere in it
-    for (int i = 0; i < label.size(); i++) {
-        if (label[i] == "n") {
-            if (i+1 < label.size() && label[i+1] == "p") {
-                return true;
-            }
-        }
-    }
-
-    // "np" is not found in the label so return false
-    return false;
+    return label == "np";
 }
 
 bool Node::is_notwumpus_marked() {
     /* 
     This function assumes that any spot that is marked as not having a wumpus is labeled "nw". This
-    may need to be changed if the spot is labeled differently. Because a spot marked as not having a 
-    wumpus can also be marked as visited, I check each character in the label to see if there is a "nw"
+    may need to be changed if the spot is labeled differently. 
     */
 
-    // check if label is simply "nw"
-    if (label == "nw") {
-        return true;
-    }
-
-    // check if "nw" is somewhere in the label
-    for (int i = 0; i < label.size(); i++) {
-        if (label[i] == "n") {
-            if (i+1 < label.size() && label[i+1] == "w") {
-                return true;
-            }
-        }
-    }
-
-    // "nw" is not found in the label so return false
-    return false;
+    return label == "nw";
 }
 
 bool Node::marked_as_visited() {
     /* 
     This function assumes that any spot that is marked as visited is labeled with a "v". This
     may need to be changed if the visited spots are labeled differently.
-    For example a no pit spot that was visited would be labeled "npv" so we must check the label
-    to see if there is a v character in it. 
     */
     
-    // if the label is just marked as visited only
-    if (label == "v") {
-        return true;
-    }
-
-    // check if the label has "v" somewhere in it
-    for (int i = 0; i < label.size(); i++) {
-        if (label[i] == "v") {
-            return true;
-        }
-    }
-    // if no v was found then the spot was not visited, so return false
-    return false;
+    return label == "v";
 }

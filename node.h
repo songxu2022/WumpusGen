@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
 /* 
@@ -12,13 +13,13 @@ class Node {
     constructor, takes in node's location, what the spot is labeled, 
     and the size of each wall (ex: if it's a 4x4 board the wall size would be 4)
     */
-    Node(int xcoord, int ycoord, string & label_, int wall_size);
+    Node(int xcoord, int ycoord, string &label_, int wall_size);
 
     // getters
     int get_x_coord() const; // gets x coordinate
     int get_y_coord() const; // gets y coordinate
     int get_wall_size() const; //gets the wall size
-    string & get_label() const; // gets the node's label
+    string& get_label() const; // gets the node's label
 
     // setters
     void set_label(string new_label); // sets the label of the node
