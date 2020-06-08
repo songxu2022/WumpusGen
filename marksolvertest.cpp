@@ -27,14 +27,14 @@ game maptrans(vector<vector<int> > numap){
 			if(numap[i][j]==1) {
 				if(i+1<wallsize) themap[i+1][j].breeze=true;
 				if(j+1<wallsize) themap[i][j+1].breeze=true;
-				if(i-1>0) themap[i-1][j].breeze=true;
-				if(j-1>0) themap[i][j-1].breeze=true;
+				if(i-1>=0) themap[i-1][j].breeze=true;
+				if(j-1>=0) themap[i][j-1].breeze=true;
 			}
 			if(numap[i][j]==2) {
 				if(i+1<wallsize) themap[i+1][j].stench=true;
 				if(j+1<wallsize) themap[i][j+1].stench=true;
-				if(i-1>0) themap[i-1][j].stench=true;
-				if(j-1>0) themap[i][j-1].stench=true;
+				if(i-1>=0) themap[i-1][j].stench=true;
+				if(j-1>=0) themap[i][j-1].stench=true;
 			}
 
 		}
@@ -64,9 +64,10 @@ int main(){
 	if(marksolver(maptrans(map4),4)) cout<<"true"<<endl;
 	else cout<<"false"<<endl;
 	
-	vector<vector<int> > map5 {{0,0,0,0},{0,0,2,3},{1,0,0,0},{0,0,0,0}};
+	vector<vector<int> > map5 {{0,0,0,1},{0,0,2,3},{1,1,0,0},{0,0,0,0}};
 	cout<<"Should be true:";
 	if(marksolver(maptrans(map5),4)) cout<<"true"<<endl;
 	else cout<<"false"<<endl;
+	
 	return 0;
 }
