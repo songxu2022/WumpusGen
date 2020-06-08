@@ -19,7 +19,7 @@ class Node {
     int get_x_coord() const; // gets x coordinate
     int get_y_coord() const; // gets y coordinate
     int get_wall_size() const; //gets the wall size
-    string& get_label() const; // gets the node's label
+    const string& get_label() const; // gets the node's label
 
     // setters
     void set_label(string new_label); // sets the label of the node
@@ -40,13 +40,11 @@ class Node {
     bool is_notwumpus_marked(); // checks if the node is marked as not having a wumpus
     bool marked_as_visited(); // checks if the node was marked as having been visited
 	
-	/*below functions need to be implemented or add a way to initialize*/
-	bool is_breeze();
-	bool is_stench();
-	// bools for
-	//shoot arrow 
-	void killw(); // shoot at this node 
-	// bool for markings for algorithm
+	bool is_breeze(); // checks if the node feels a breeze coming from a pit
+	bool is_stench(); // checks if the node smells a stench coming from the wumpus
+	void killw(); // shoot at this node and removes the wumpus label, spot is now empty
+	
+    // all of these default to false
 	bool nw=false;
 	bool np=false;
 	bool visited=false;

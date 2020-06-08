@@ -19,7 +19,7 @@ int Node::get_y_coord() const {
     return y_coord;
 }
 
-string& Node::get_label() const {
+const string& Node::get_label() const {
     return label;
 }
 
@@ -113,4 +113,31 @@ bool Node::marked_as_visited() {
     */
     
     return label == "v";
+}
+
+bool Node::is_breeze() {
+    /* 
+    This function assumes that any spot that is marked as having a breeze is labeled with
+    "breeze". This may need to be changed if spots with breezes are labeled differently.
+    */
+
+    return label == "breeze";
+}
+
+bool Node::is_stench() {
+    /*
+    This function asssumes that any spot that is marked as having a stench is labeled with
+    "stench". This may need to be changed if spots with a stench are labeled differently.
+    */
+
+    return label == "stench";
+}
+
+void Node::killw() {
+    /*
+     if the wumpus is shot and killed, that means the node's label must change from "w"/having a wumpus
+     to "e" for it is now empty
+     */
+    this->label = "e";
+    return;
 }
