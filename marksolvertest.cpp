@@ -58,5 +58,15 @@ int main(){
 	cout<<"Should be true:";
 	if(marksolver(maptrans(map3),4)) cout<<"true"<<endl;
 	else cout<<"false"<<endl;
+	
+	vector<vector<int> > map4 {{0,0,1,0},{0,0,0,3},{1,0,0,0},{0,0,0,0}};
+	cout<<"Should be false:";
+	if(marksolver(maptrans(map4),4)) cout<<"true"<<endl;
+	else cout<<"false"<<endl;
+	
+	vector<vector<int> > map5 {{0,0,0,0},{0,0,2,3},{1,0,0,0},{0,0,0,0}};
+	cout<<"Should be true:";
+	if(marksolver(maptrans(map5),4)) cout<<"true"<<endl;
+	else cout<<"false"<<endl;
 	return 0;
 }
