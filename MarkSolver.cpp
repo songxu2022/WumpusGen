@@ -201,6 +201,11 @@ bool marksolver( game theboard, int mapsize ){
 		if(beforeshooting[x][y].is_wumpus()){
 			beforeshooting[x][y].nw=true;
 			beforeshooting[x][y].np=true;
+			for(int a=0;a<mapsize;a++){
+				for(int b=0;b<mapsize;b++){
+					beforeshooting[a][b].stench=false;
+				}
+			}
 		}
 		else{
 			beforeshooting[x][y].nw=true;
@@ -243,6 +248,11 @@ bool marksolver( game theboard, int mapsize ){
 			beforeshooting1[x][y].nw=true;
 			beforeshooting1[c][d].nw=true;
 			beforeshooting1[x][y].np=true;
+			for(int a=0;a<mapsize;a++){
+				for(int b=0;b<mapsize;b++){
+					beforeshooting1[a][b].stench=false;
+				}
+			}
 		}
 		else{
 			beforeshooting1[x][y].nw=true;
@@ -254,6 +264,11 @@ bool marksolver( game theboard, int mapsize ){
 			beforeshooting2[x][y].nw=true;
 			beforeshooting2[c][d].nw=true;
 			beforeshooting2[c][d].np=true;
+			for(int a=0;a<mapsize;a++){
+				for(int b=0;b<mapsize;b++){
+					beforeshooting2[a][b].stench=false;
+				}
+			}
 		}
 		else{
 			beforeshooting2[c][d].nw=true;
