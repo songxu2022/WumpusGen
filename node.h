@@ -43,16 +43,15 @@ class Node {
     bool is_notwumpus_marked(); // checks if the node is marked as not having a wumpus
     bool marked_as_visited(); // checks if the node was marked as having been visited
 	
-	bool is_breeze(); // checks if the node feels a breeze coming from a pit
-	bool is_stench(); // checks if the node smells a stench coming from the wumpus
-	void killw(); // shoot at this node and removes the wumpus label, spot is now empty
+    void killw(); // shoot at this node and removes the wumpus label, spot is now empty
 	
     // all of these default to false
-	bool nw=false;
-	bool np=false;
-	bool visited=false;
-	bool breeze=false;
-	bool stench=false;
+    bool nw=false;
+    bool np=false;
+    bool visited=false;
+    bool breeze=false;
+    bool stench=false;
+	
     private:
 
     int x_coord;
