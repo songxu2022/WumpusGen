@@ -118,23 +118,6 @@ bool Node::marked_as_visited() {
     return label == "v";
 }
 
-bool Node::is_breeze() {
-    /* 
-    This function assumes that any spot that is marked as having a breeze is labeled with
-    "breeze". This may need to be changed if spots with breezes are labeled differently.
-    */
-
-    return breeze;
-}
-
-bool Node::is_stench() {
-    /*
-    This function asssumes that any spot that is marked as having a stench is labeled with
-    "stench". This may need to be changed if spots with a stench are labeled differently.
-    */
-
-    return stench;
-}
 
 void Node::killw() {
     /*
