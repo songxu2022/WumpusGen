@@ -1,0 +1,21 @@
+NODE CLASS
+
+Purpose: The node class is designed to keep track of all of the information about one node. A node is an individual spot on the game board.
+
+Arguments: A node object takes in its x coordinate, x coordinate, label, and the wall size. The x and y coordinates are the node's position on the game board as a whole. The label is any markings the node has (for example if the node had a wumpus on it, the label would be w for wumpus). The wall size is the dimensions of the game board that the node is on (for example if the game board was 4x4, then the wall size would be entered as 4). 
+
+Common abbreviations used:
+nw = no wumpus
+np = no pit
+w = wumpus
+p = pit
+g = gold
+s = start
+e = empty
+v = visited
+
+Functions: 
+This class contains getters for all of the arguments. This class conatains a setter for the label only, since it is the only argument that is subject to change. 
+This class contains multiple bools for what is around the node, like if it is in a corner or next to one of the many walls. There are also many bools that deal with the label and checks if the node is labeled as having a particular obstacle or not. For example, there is bool is_pit() which checks if the label of the node says there is a pit in that spot, and additionally there is bool is_notpit_marked() which checks if the label of the node says there is no pit at that location. 
+The void killw() function was made for when there is a wumpus in a particular spot and the game player wants to shoot the wumpus and kill it. This function says if the node shot at was labeled w, it will change the label of that spot to not empty and the nw bool (that is defaulted to false) to be set to true. If the node shot at was not labeled as having a wumpus, then nothing happens. 
+There are many bools at the bottom that automatically default to false such as bool nw and bool stench. These default to false because until we have further information, we assume that our node is not next to an obstacle, and when the player gets information that the node is in fact next to a pit, wumpus or other obstacle, it can change these bools to true. This helps keep track of what we know about a node.
