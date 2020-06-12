@@ -8,6 +8,7 @@ using namespace std;
 /* 
 This is a class to keep track of each individual node (aka spot on game board)
 It is designed to know everything about one specific node.
+Please look at the text file called nodeclass_info for documentation.
 */
 
 class Node {
