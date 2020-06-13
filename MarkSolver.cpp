@@ -22,6 +22,30 @@ bool checkgold(game gamestate, int mapsize){
 	return true;
 }
 
+bool checkglitter(game gamestate, int mapsize){
+	int count=0;
+	bool goldnear=false;
+	for(int i=0;i<mapsize;i++){
+		for(int j =0;j<mapsize;j++){
+			if(gamestate[i][j].ng==false){
+				count++;
+			}
+			if (gamestate[i][j].is_gold()==true) {
+				if(i+1<mapsize&& gamestate[i+1][j].visited)goldnear=true;
+				if(j+1<mapsize&& gamestate[i][j+1].visited)goldnear=true;
+				if(i-1>=0&& gamestate[i-1][j].visited)goldnear=true;
+				if(j-1>=0&& gamestate[i][j-1].visited)goldnear=true;
+				
+			}
+		}
+	}
+	if(goldnear&&count==1) {
+	
+	return true;
+	}
+	return false;
+}
+
 /* 	countposwnum counts the number of possible spots of wumpus that the robot think it can be.
 	@param gamestate  It is the game board of the current state
 	@param mapsize  It is n for an n*n board, we assume that all the boards are in shape of n*n.
@@ -51,7 +75,7 @@ game expandbyrule(game gamestate, int mapsize){
 				if(gamestate[i][j].visited==false&&gamestate[i][j].nw==true&&gamestate[i][j].np==true){
 					gamestate[i][j].visited=true;
 					expanding=true;
-					if (gamestate[i][j].is_breeze() && gamestate[i][j].is_stench()){
+					if (gamestate[i][j].breeze && gamestate[i][j].stench){
 						for(int x=0;x<mapsize;x++){
 							for(int y =0;y<mapsize;y++){
 								if(!((x==i+1&&y==j)||(x==i-1&&y==j)||(x==i&&y==j+1)||(x==i&&y==j-1)) ) {
@@ -62,7 +86,7 @@ game expandbyrule(game gamestate, int mapsize){
 						
 					}				
 	
-					else if(gamestate[i][j].is_stench()){
+					else if(gamestate[i][j].stench){
 						for(int x=0;x<mapsize;x++){
 							for(int y =0;y<mapsize;y++){
 								if(!((x==i+1&&y==j)||(x==i-1&&y==j)||(x==i&&y==j+1)||(x==i&&y==j-1)) ) {
@@ -76,7 +100,7 @@ game expandbyrule(game gamestate, int mapsize){
 						if(j-1>=0) gamestate[i][j-1].np=true;
 					}
 	
-					else if(gamestate[i][j].is_breeze()){
+					else if(gamestate[i][j].breeze){
 						if(i+1<mapsize) gamestate[i+1][j].nw=true;
 						if(j+1<mapsize) gamestate[i][j+1].nw=true;
 						if(i-1>=0) gamestate[i-1][j].nw=true;
@@ -94,6 +118,22 @@ game expandbyrule(game gamestate, int mapsize){
 						if(j-1>=0) gamestate[i][j-1].nw=true;
 						
 					}
+				}
+				if(gamestate[i][j].glitter){
+					for(int x=0;x<mapsize;x++){
+							for(int y =0;y<mapsize;y++){
+								if(!((x==i+1&&y==j)||(x==i-1&&y==j)||(x==i&&y==j+1)||(x==i&&y==j-1)) ) {
+									gamestate[x][y].ng=true;
+								}
+							}
+						}
+					
+				}
+				else{
+					if(i+1<mapsize) gamestate[i+1][j].ng=true;
+					if(j+1<mapsize) gamestate[i][j+1].ng=true;
+					if(i-1>=0) gamestate[i-1][j].ng=true;
+					if(j-1>=0) gamestate[i][j-1].ng=true;
 				}
 				if(testing){
 					cout<<endl;
@@ -132,7 +172,7 @@ bool marksolver( game theboard, int mapsize ){
 	gamestate[i][j].nw=true;
 	gamestate[i][j].np=true;
 	
-	if (gamestate[i][j].is_breeze() && gamestate[i][j].is_stench()){
+	if (gamestate[i][j].breeze && gamestate[i][j].stench){
 		for(int x=0;x<mapsize;x++){
 			for(int y =0;y<mapsize;y++){
 				if(!((x==i+1&&y==j)||(x==i-1&&y==j)||(x==i&&y==j+1)||(x==i&&y==j-1)) ) {
@@ -142,7 +182,7 @@ bool marksolver( game theboard, int mapsize ){
 		}
 	}
 	
-	else if(gamestate[i][j].is_stench()){
+	else if(gamestate[i][j].stench){
 		for(int x=0;x<mapsize;x++){
 			for(int y =0;y<mapsize;y++){
 				if(!((x==i+1&&y==j)||(x==i-1&&y==j)||(x==i&&y==j+1)||(x==i&&y==j-1)) ) {
@@ -156,7 +196,7 @@ bool marksolver( game theboard, int mapsize ){
 		if(j-1>=0) gamestate[i][j-1].np=true;
 	}
 	
-	else if(gamestate[i][j].is_breeze()){
+	else if(gamestate[i][j].breeze){
 		if(i+1<mapsize) gamestate[i+1][j].nw=true;
 		if(j+1<mapsize) gamestate[i][j+1].nw=true;
 		if(i-1>=0) gamestate[i-1][j].nw=true;
@@ -177,6 +217,7 @@ bool marksolver( game theboard, int mapsize ){
 	game beforeshooting=expandbyrule(gamestate,mapsize);
 	// if gold already reached, just return true
 	if(checkgold(beforeshooting,mapsize)) return true;
+	if(checkglitter(beforeshooting,mapsize)) return true;
 	//shoot the wumpus down if it is possible
 	int wnumber=countposwnum( beforeshooting, mapsize);
 		//only one possible place for wumpus
@@ -215,6 +256,7 @@ bool marksolver( game theboard, int mapsize ){
 		game aftershooting=expandbyrule(beforeshooting,mapsize);
 		
 		if(checkgold(aftershooting,mapsize)) return true;
+		if(checkglitter(aftershooting,mapsize)) return true;
 	}
 	
 		//if there are two possible places for wumpus
@@ -275,7 +317,7 @@ bool marksolver( game theboard, int mapsize ){
 		}
 		beforeshooting2[c][d].killw();
 		game aftershooting2=expandbyrule(beforeshooting2,mapsize);
-		if(checkgold(aftershooting1,mapsize)&&checkgold(aftershooting2,mapsize)) return true;
+		if((checkgold(aftershooting1,mapsize)||checkglitter(aftershooting1,mapsize))&&(checkgold(aftershooting2,mapsize)||checkglitter(aftershooting2,mapsize))) return true;
 	}
 	
 	return false;

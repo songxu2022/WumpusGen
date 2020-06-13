@@ -52,7 +52,8 @@ class Node {
     bool visited=false;
     bool breeze=false;
     bool stench=false;
-	
+	bool ng=false;
+	bool glitter=false;
     private:
 
     int x_coord;

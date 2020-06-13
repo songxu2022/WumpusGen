@@ -36,6 +36,12 @@ game maptrans(vector<vector<int> > numap){
 				if(i-1>=0) themap[i-1][j].stench=true;
 				if(j-1>=0) themap[i][j-1].stench=true;
 			}
+			if(numap[i][j]==3) {
+				if(i+1<wallsize) themap[i+1][j].glitter=true;
+				if(j+1<wallsize) themap[i][j+1].glitter=true;
+				if(i-1>=0) themap[i-1][j].glitter=true;
+				if(j-1>=0) themap[i][j-1].glitter=true;
+			}
 
 		}
 		
@@ -67,6 +73,41 @@ int main(){
 	vector<vector<int> > map5 {{0,0,0,1},{0,0,2,3},{1,1,0,0},{0,0,0,0}};
 	cout<<"Should be true:";
 	if(marksolver(maptrans(map5),4)) cout<<"true"<<endl;
+	else cout<<"false"<<endl;
+	
+	vector<vector<int> > map6 {{0,0,0,0},{0,0,0,0},{1,1,0,1},{3,0,2,0}};
+	cout<<"Should be true:";
+	if(marksolver(maptrans(map6),4)) cout<<"true"<<endl;
+	else cout<<"false"<<endl;
+	
+	vector<vector<int> > map7 {{0,0,0,0},{0,0,0,2},{1,0,0,3},{0,0,0,0}};
+	cout<<"Should be true:";
+	if(marksolver(maptrans(map7),4)) cout<<"true"<<endl;
+	else cout<<"false"<<endl;
+	
+	vector<vector<int> > map8 {{0,0,2,3},{0,0,0,0},{0,0,0,1},{1,1,0,0}};
+	cout<<"Should be true:";
+	if(marksolver(maptrans(map8),4)) cout<<"true"<<endl;
+	else cout<<"false"<<endl;
+	
+	vector<vector<int> > map9 {{0,0,0,1},{0,0,1,0},{0,1,0,0},{3,0,2,0}};
+	cout<<"Should be true:";
+	if(marksolver(maptrans(map9),4)) cout<<"true"<<endl;
+	else cout<<"false"<<endl;
+	
+	vector<vector<int> > map10 {{0,0,1,0},{0,0,0,1},{2,0,3,0},{1,1,0,0}};
+	cout<<"Should be true:";
+	if(marksolver(maptrans(map10),4)) cout<<"true"<<endl;
+	else cout<<"false"<<endl;
+	
+	vector<vector<int> > map11 {{0,0,0,1},{0,0,1,0},{0,1,0,0},{2,0,3,0}};
+	cout<<"Should be true:";
+	if(marksolver(maptrans(map11),4)) cout<<"true"<<endl;
+	else cout<<"false"<<endl;
+	
+	vector<vector<int> > map12 {{0,0,1,0},{0,0,0,3},{0,2,0,0},{0,0,0,1}};
+	cout<<"Should be true:";
+	if(marksolver(maptrans(map12),4)) cout<<"true"<<endl;
 	else cout<<"false"<<endl;
 	
 	return 0;
