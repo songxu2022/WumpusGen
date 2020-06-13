@@ -3,6 +3,7 @@
 #include <string>
 #include "node.cpp"
 #include "MarkSolver.cpp"
+#include <ctime>
 using namespace std;
 typedef vector< vector<Node> > game;
 // 0==empty 1==pit 2==wumups 3==gold
@@ -109,6 +110,15 @@ int main(){
 	cout<<"Should be true:";
 	if(marksolver(maptrans(map12),4)) cout<<"true"<<endl;
 	else cout<<"false"<<endl;
+	
+	vector<vector<int> > map14 {{0,0,0,0},{0,0,0,0},{1,1,0,1},{3,0,2,0}};
+	vector<vector<Node> > board=maptrans(map14);
+	clock_t start=clock();
+	for(int i=0;i<100000;i++){
+		marksolver(board,4);
+	}
+	double duration = ( std::clock() - start ) / (double) CLOCKS_PER_SEC;
+	cout<<"total time: "<<duration<<endl;
 	
 	return 0;
 }
