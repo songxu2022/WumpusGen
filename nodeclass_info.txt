@@ -7,6 +7,7 @@ Arguments: A node object takes in its x coordinate, x coordinate, label, and the
 Common abbreviations used:
 nw = no wumpus
 np = no pit
+ng = no gold
 w = wumpus
 p = pit
 g = gold
