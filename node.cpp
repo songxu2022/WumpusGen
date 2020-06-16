@@ -8,10 +8,12 @@ using namespace std;
 
 Node::Node(int xcoord, int ycoord, string label_, int wall_size_) {
     // constructor function
-    x_coord = xcoord;
-    y_coord = ycoord;
     label = label_;
-    wall_size = wall_size_;
+    // the max functions make sure the x and y coordinates are never negative
+    x_coord = max(0, xcoord);
+    y_coord = max(0, ycoord);
+    // the minimum wall size is 4 so check that the given wall size is at least 4
+    wall_size = max(4, wall_size_);
 }
 
 int Node::get_x_coord() const {
