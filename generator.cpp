@@ -7,6 +7,13 @@
 #include "node.h"
 
 #define   RAND_MAX   0x7fffu 
+
+// My goal is to consolidate everything we are doing for the generator into one place
+// so I am using the generatorIdeas functions to create the grid
+// and the nodes class to add nodes to the grid to create something that can be more
+// interactive and respond then prompted to
+// I am not sure what we want to output, so it is easy to return the grid of strings or nodes 
+
 int main()   
 { 
 	int size;
@@ -17,9 +24,18 @@ int main()
 	std::cout << "Enter the number of pits:"; // enter the # of pits
 	std::cin >> pits;
 	
-	std::vector<std::vector<std::string> > board;
+	std::vector<board> listOfGrids;
 
-	
+	// create 1 board without any stuff in it
+	listOfGrids= makeBoards(size, 1, pits);
+
+	// replaces strings with a 2d grid with nodes
+	for(int x=0; x< size; x++){
+		for(int y=0; y<size; y++){
+
+		}
+	}
+
 
 
 	return  0;
