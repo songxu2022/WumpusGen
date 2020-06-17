@@ -12,7 +12,9 @@
 // so I am using the generatorIdeas functions to create the grid
 // and the nodes class to add nodes to the grid to create something that can be more
 // interactive and respond then prompted to
+
 // I am not sure what we want to output, so it is easy to return the grid of strings or nodes 
+// It is possible to just 
 
 int main()   
 { 
@@ -29,10 +31,15 @@ int main()
 	// create 1 board without any stuff in it
 	listOfGrids= makeBoards(size, 1, pits);
 
+
+	// use this code if we want to make the grid have nodes in it
+	// ignore this code if we want to return a 2D grid of strings instead
+	std::vector<std::vector<nodes> > game; // implementation of gameBoard with nodes instead of strings
+
 	// replaces strings with a 2d grid with nodes
 	for(int x=0; x< size; x++){
 		for(int y=0; y<size; y++){
-
+			
 		}
 	}
 
