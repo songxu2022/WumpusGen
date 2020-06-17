@@ -65,20 +65,75 @@ bool change_label_test() {
     return true;
     }
 
+bool wall_test() {
+    // node v_wall is next to an upper wall
+    Node u_wall(0, 2, "e", 4);
+    // node h_wall is next to a right wall
+    Node r_wall(1, 3 , "e", 4);
+    // node corner_node is in a corner spot, next to left and bottom wall
+    Node corner_node(3, 0 , "e", 4);
+    // node middle is not near any walls
+    Node middle(2, 2, "g", 4);
+
+    // test that the wall functions that describe each of these nodes come out true
+    if (!u_wall.next_to_upper_wall()) {
+        return false;
+    }
+    if (!r_wall.next_to_right_wall()) {
+        return false;
+    }
+    if (!corner_node.next_to_left_wall()) {
+        return false;
+    }
+    if (!corner_node.next_to_lower_wall()) {
+        return false;
+    }
+    if (!corner_node.is_corner_spot()) {
+        return false;
+    }
+    // the middle node is next to no walls so it should return false for everything
+    if (middle.next_to_upper_wall() || middle.is_corner_spot() || middle.next_to_lower_wall()) {
+        return false;
+    }
+    // if the function made it to the end then everything worked as planned
+    return true;
+}
+
 
 int main() 
 {
+//variable to keep track of number of tests ran
+int tests = 0;
+// variable to keep track of number of tests that passed
+int successes = 0;
+
 // runs invalid input test and prints results
+tests += 1;
 if (invalid_input_test()) {
+    successes += 1;
     cout << "Invalid input test passed!" << endl;
 } else {
     cout << "Error, invalid input test failed!" << endl;
 }
 // runs changing the label test and prints results
+tests += 1;
 if (change_label_test()) {
+    successes += 1;
     cout << "Change label test passed!" << endl;
 } else {
     cout << "Error, change label test failed!" << endl;
+}
+// runs wall test and prints results
+tests += 1;
+if (wall_test()) {
+    successes += 1;
+    cout<< "Wall test passed!" << endl;
+} else {
+    cout << "Error, wall test failed!" << endl;
+}
+// if the number of successes matches the number of tests we ran, then we know everything passed
+if (successes == tests) {
+    cout << "All tests passed!" << endl;
 }
 return 0;
 }
