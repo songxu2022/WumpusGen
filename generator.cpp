@@ -30,7 +30,7 @@ int main()
 
 	// create 1 board without any stuff in it
 	listOfGrids= makeBoards(size, 1, pits);
-
+	board genGrid= listOfGrids[0];
 
 	// use this code if we want to make the grid have nodes in it
 	// ignore this code if we want to return a 2D grid of strings instead
@@ -39,7 +39,7 @@ int main()
 	// replaces strings with a 2d grid with nodes
 	for(int x=0; x< size; x++){
 		for(int y=0; y<size; y++){
-			
+			game[x][y]= Node node(x, y, genGrid[x][y], size);
 		}
 	}
 
