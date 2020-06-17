@@ -10,7 +10,7 @@
 
 
 typedef std::vector<std::vector<std::string> > board;
-typedef std::pair<int, int> coord;
+//typedef std::pair<int, int> coord;
 
 
 bool inBoard(int x, int y, int size)
