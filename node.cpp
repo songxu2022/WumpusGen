@@ -14,6 +14,9 @@ Node::Node(int xcoord, int ycoord, string label_, int wall_size_) {
     y_coord = max(0, ycoord);
     // the minimum wall size is 4 so check that the given wall size is at least 4
     wall_size = max(4, wall_size_);
+    // make sure x and y are feasible given the wall size, and if not, change it to the largest possible coorindate
+    x_coord = min(x_coord, wall_size - 1);
+    y_coord = min(y_coord, wall_size - 1);
 }
 
 int Node::get_x_coord() const {
