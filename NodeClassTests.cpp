@@ -12,9 +12,7 @@ label gets changed.
 */
 
 bool invalid_input_test() { 
-/* 
-tests that giving the program negative numbers will not work and be corrected to 0
-*/
+// this function tests that any incorrect inputs will be corrected, such as negative or too large coorindates
 
 // the mistake for n1 is that the y coordinate is negative
 Node n1(2, -1, "e", 4);
@@ -34,6 +32,20 @@ if (n2.get_x_coord() != 0) {
 if (n3.get_wall_size() != 4 || n4.get_wall_size() != 4) {
     return false;
 }
+
+// the mistake for n5 and n6 is that the coordinates are not possible given the wall size
+Node n5(10, 10, "e", 4); // can't be location (10,10) on a 4x4 board
+Node n6(6, 1, "e", 6); // cant'e be location (6,1) on a 6x6 board
+if (n5.get_x_coord() != 3) {
+    return false;
+}
+if (n5.get_y_coord() != 3) {
+    return false;
+}
+if (n6.get_x_coord() != 5) {
+    return false;
+}
+
 // if function makes it to the end then everything worked so return true;
 return true;
 }
@@ -99,6 +111,27 @@ bool wall_test() {
     return true;
 }
 
+bool default_bool_test() {
+// this tests that every bool that defaults to false stays that way until changed, and once changed it stays changed
+    Node spot(3, 0, "s", 4);
+    if (spot.nw || spot.np || spot.ng || spot.visited || spot.breeze || spot.stench || spot.glitter) {
+        return false;
+    }
+    spot.np = true;
+    if (!spot.np) {
+        return false;
+    }
+    spot.np = false;
+    if (spot.np) {
+        return false;
+    }
+    spot.glitter = true;
+    if (!spot.glitter) {
+        return false;
+    }
+    // everything passed to return true
+    return true;
+}
 
 int main() 
 {
@@ -108,28 +141,35 @@ int tests = 0;
 int successes = 0;
 
 // runs invalid input test and prints results
-tests += 1;
+tests ++;
 if (invalid_input_test()) {
-    successes += 1;
+    successes ++;
     cout << "Invalid input test passed!" << endl;
 } else {
     cout << "Error, invalid input test failed!" << endl;
 }
 // runs changing the label test and prints results
-tests += 1;
+tests ++;
 if (change_label_test()) {
-    successes += 1;
+    successes ++;
     cout << "Change label test passed!" << endl;
 } else {
     cout << "Error, change label test failed!" << endl;
 }
 // runs wall test and prints results
-tests += 1;
+tests ++;
 if (wall_test()) {
-    successes += 1;
+    successes ++;
     cout<< "Wall test passed!" << endl;
 } else {
     cout << "Error, wall test failed!" << endl;
+}
+tests ++;
+if (default_bool_test()) {
+    successes ++;
+    cout<< "Default bool test passed!" << endl;
+} else {
+    cout << "Error, default bool test failed!" << endl;
 }
 // if the number of successes matches the number of tests we ran, then we know everything passed
 if (successes == tests) {
