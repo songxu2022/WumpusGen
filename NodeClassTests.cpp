@@ -133,6 +133,24 @@ bool default_bool_test() {
     return true;
 }
 
+bool killw_test() {
+    //tests that the killw function works only when spot is labeled w and changes what its supposed to
+    Node badspot(2, 3, "g", 4);
+    Node wumpusspot(1, 1, "w", 4);
+    badspot.killw();
+    // checks that labels weren't changed on the node that did not have a wumpus
+    if (badspot.get_label() == "e" || badspot.get_label() != "g" || badspot.nw || badspot.np) {
+        return false;
+    }
+    wumpusspot.killw();
+    // checks that all labels were changed since the killw function was ran on a spot with a wumpus
+    if (wumpusspot.get_label() != "e" || wumpusspot.get_label() == "w" || !wumpusspot.nw || !wumpusspot.np ) {
+        return false;
+    }
+    // if function made it to the end then everything worked, return true
+    return true;
+}
+
 int main() 
 {
 //variable to keep track of number of tests ran
@@ -170,6 +188,13 @@ if (default_bool_test()) {
     cout<< "Default bool test passed!" << endl;
 } else {
     cout << "Error, default bool test failed!" << endl;
+}
+tests ++;
+if (killw_test()) {
+    successes ++;
+    cout << "Kill wumpus test passed!" << endl;
+} else {
+    cout << "Error, kill wumpus test failed!" << endl;
 }
 // if the number of successes matches the number of tests we ran, then we know everything passed
 if (successes == tests) {
