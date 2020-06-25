@@ -23,6 +23,8 @@ There are many bools at the bottom that automatically default to false such as b
 
 NODECLASSTESTS.CPP:
 This file is a testing file for all the functions of the node class. Each test in the NodeClassTests.cpp tests something that could go wrong with creating a Node using the node class.
-bool invalid_input_test() tests that giving the node class negative numbers for the x and y coordinates will not work and will be changed to 0. It also tests that the node class will change any wall size that is less than 4 to 4, because a grid cannot be smaller than 4x4.
+bool invalid_input_test() tests that giving the node class negative numbers for the x and y coordinates will not work and will be changed to 0. It also tests that the node class will change any wall size that is less than 4 to 4, because a grid cannot be smaller than 4x4. The last thing it tests is that the coorindates are reasonable given the wall size. For example, if there was a grid that was only 4x4, there could not be a Node at (10,10). My class should correct any coordinate greater than the given wall size to the largest possible x or y coordinate it could reasonably be.
 bool change_label_test() tests the label setter and makes sure that all bools associated with a label are changed when the label is changed.
 bool wall_test() tests that all the bools that indicate a Node spot is next to a wall work, and that the wall bools are false for any Node that is in the middle of the game board.
+bool default_bool_test() tests that all of the bools that the node class defaults to false can be changed to true and will stay true if they are told to do so.
+bool killw_test() tests that the function for killing the wumpus only works on spots that are labeled "w" as having a wumpus on them, and that this function will make no changes if called on a spot that is not labeled as having a wumpus on it. 
