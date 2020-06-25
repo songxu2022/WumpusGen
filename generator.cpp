@@ -42,6 +42,19 @@ int main()
 			game[x][y]= Node node(x, y, genGrid[x][y], size);
 		}
 	}
+	// write the matrix into a visualize txt file
+	string visual[size];
+	for(int x=0; x< size; x++){
+		for(int y=0; y<size; y++){
+			visual[x] = game[x][y].get_label();
+		}
+	}
+	ofstream OutFile("generator_visual.txt");
+	for(int i = size - 1; i >= 0; i--){
+		OutFile << visual[i] << "\n";
+	}
+	OutFile.close();
+
 
 
 
